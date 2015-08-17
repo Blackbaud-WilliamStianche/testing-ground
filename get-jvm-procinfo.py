@@ -9,6 +9,6 @@ import subprocess
 
 process_name = "Xorg"
 ps_output = subprocess.check_output(["ps","-fC",process_name])
-#for line in iter(ps_output):
-#    print line
-print ps_output
+for line in ps_output.splitlines():
+    print "-------"
+    print line
