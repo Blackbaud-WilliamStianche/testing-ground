@@ -8,6 +8,6 @@ import os
 import subprocess
 
 process_name = "Xorg"
-psj = subprocess.call(["ps","-fC",process_name])
-for process in iter(psj.stdout.readline, ''):
-    print process,
+ps_output = subprocess.check_output(["ps","-fC",process_name])
+for line in iter(ps_output):
+    print line
