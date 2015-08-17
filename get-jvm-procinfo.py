@@ -6,11 +6,16 @@ import datetime
 import json
 import os
 import subprocess
-
+output = []
 process_name = "Xorg"
 ps_output = subprocess.check_output(["ps","-C",process_name])
-header_line = true
 for line in ps_output.splitlines():
-    lines = line.split()
+    x = []
+    for item in line.split():
+        x.append(item)
+    print "Printing X"
+    print x
+    output.append(x)
 
-print lines
+print "Printing output"
+print output
