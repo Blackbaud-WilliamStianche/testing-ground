@@ -7,6 +7,6 @@ import json
 import os
 import subprocess
 
-psj = subprocess.call("ps", "-fC", "java")
+psj = subprocess.call("ps", "-fC")
 for process in iter(psj.stdout.readline, ''):
     print process,
