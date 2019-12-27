@@ -53,15 +53,16 @@ def process_queues():
         threads.append(threading.Thread(name=str(q+1), target=one_worker, args=(queues[q+1],)))
     for t in threads:
         t.start()
+    for t in threads:
         t.join()
 
 
 if __name__ == "__main__":
-    # with open('infile.csv', 'r') as infile:
-    #     cProfile.run('one_thread(infile)')
-    #
-    # with open('infile1.csv', 'r') as infile1, open('infile2.csv', 'r') as infile2:
-    #     cProfile.run('two_threads(infile1, infile2)')
+    with open('infile.csv', 'r') as infile:
+        cProfile.run('one_thread(infile)')
+
+    with open('infile1.csv', 'r') as infile1, open('infile2.csv', 'r') as infile2:
+        cProfile.run('two_threads(infile1, infile2)')
 
     with open('infile.csv', 'r') as infile:
         cProfile.run('generate_queues(infile)')
