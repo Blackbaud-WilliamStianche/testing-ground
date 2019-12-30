@@ -12,7 +12,7 @@ def gen_input(file_handle, count, min_group, max_group, min_value, max_value):
     return group_counts
 
 if __name__ == "__main__":
-    c = 20
+    c = 1200
     mng = 1
     mxg = 8
     mnv = 1

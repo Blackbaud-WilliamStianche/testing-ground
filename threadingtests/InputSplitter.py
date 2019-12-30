@@ -4,7 +4,7 @@ if __name__ == "__main__":
     outfile_basename = "infile"
     outfile_extension = ".csv"
     outfile_count = 0
-    max_size = 10
+    max_size = 600
     with open("infile.csv", 'r') as infile:
         infile_contents = infile.readlines()
 
