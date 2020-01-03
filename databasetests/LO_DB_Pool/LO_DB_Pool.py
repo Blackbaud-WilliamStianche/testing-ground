@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """Python library for creating and using Luminate Online Database Connections within Python.
 
 Requires:
@@ -67,22 +65,40 @@ class LODBPool:
             if 'db_pass' not in kwargs:
                 # TODO Add message about missing db_pass parameter
                 raise RuntimeError
+        if 'min' in kwargs:
+            if kwargs['min'] < 1 or kwargs['min'] > 5:
+                # TODO Add message about invalid value for min parameter
+                raise RuntimeError
+        else:
+            kwargs['min'] = 1
+        if 'max' in kwargs:
+            if kwargs['max'] < 1 or kwargs['max'] > 10:
+                # TODO Add message about invalid value for max parameter
+                raise RuntimeError
+        else:
+            kwargs['max'] = 2
 
         if kwargs['type'] == 'convio':
             try:
-                self.pool = cx_Oracle.SessionPool('convio', 'convio', kwargs['db'], min=2, max=5,
+                self.pool = cx_Oracle.SessionPool('convio', 'convio', kwargs['db'],
+                                                  min=kwargs['min'], max=kwargs['max'],
                                                   increment=1, encoding="UTF-8")
             except cx_Oracle.DatabaseError as error:
                 print(error)
+                raise error
+        elif kwargs['type'] == 'site':
+            try:
+                self.pool = cx_Oracle.SessionPool(kwargs['db'], min=kwargs['min'],
+                                                  max=kwargs['max'], increment=1, encoding="UTF-8",
+                                                  homogeneous=False)
+            except cx_Oracle.DatabaseError as error:
+                print(error)
+                raise error
 
 
-
-
-
-
-class Convio_Pool:
+class ConvioPool:
     pass
 
 
-class Site_Pool:
+class SitePool:
     pass

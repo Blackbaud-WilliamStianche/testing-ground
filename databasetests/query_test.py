@@ -3,13 +3,6 @@ import cx_Oracle
 
 userpwd = "teste" # Obtain password string from a user prompt or environment variable
 
-try:
-    with cx_Oracle.connect("tester", userpwd, "localhost/XE", encoding="UTF-8") as connection:
-        cursor = connection.cursor()
-        for result in cursor.execute("select sysdate from dual"):
-            print(result)
-except cx_Oracle.DatabaseError as error:
-    print(error)
 
 try:
     pool = cx_Oracle.SessionPool("tester", userpwd, "localhost/XE", min=2, max=5, increment=1, encoding="UTF-8")
