@@ -53,28 +53,26 @@ class LODBPool:
             self.cluster = Cluster()
 
         if 'type' not in kwargs or kwargs['type'] not in accepted_types:
-            # TODO Add message about invalid or missing type parameter
-            raise RuntimeError
+            raise ValueError("The 'type' kwarg is required and must contain a value "
+                             "from {}".format(accepted_types))
         if 'db' not in kwargs or kwargs['db'] not in self.cluster.db_list:
-            # TODO Add message about invalid or missing db parameter
-            raise RuntimeError
+            raise ValueError("The 'db' kwarg is required and must contain a value "
+                             "from {}".format(self.cluster.db_list))
         if kwargs['type'] != 'convio':
             if 'db_user' not in kwargs:
-                # TODO Add messsage about missing db_user parameter
-                raise RuntimeError
+                raise TypeError("The 'db_user' kwarg is required when using 'type' "
+                                "of {}".format(kwargs['type']))
             if 'db_pass' not in kwargs:
-                # TODO Add message about missing db_pass parameter
-                raise RuntimeError
+                raise TypeError("The 'db_pass' kwarg is required when using 'type' "
+                                "of {}".format(kwargs['type']))
         if 'min' in kwargs:
             if kwargs['min'] < 1 or kwargs['min'] > 5:
-                # TODO Add message about invalid value for min parameter
-                raise RuntimeError
+                raise ValueError("The 'min' kwarg cannot exceed 5")
         else:
             kwargs['min'] = 1
         if 'max' in kwargs:
             if kwargs['max'] < 1 or kwargs['max'] > 10:
-                # TODO Add message about invalid value for max parameter
-                raise RuntimeError
+                raise ValueError("The 'max' kwarg cannot exceed 10")
         else:
             kwargs['max'] = 2
 
