@@ -49,8 +49,6 @@ class LODBPool:
                 site: creates heterogenous pool to a single db where site credentials can be used
                     during connection acquisition.
                 db: database sid to connect to
-                db_user: database username to connect with when acquiring a site pool connection
-                db_pass: database password to connect with when acquiring a site pool connection
                 min: minimum size of the pool
                 max: maximum size of the pool"""
 
@@ -72,13 +70,6 @@ class LODBPool:
         if 'db' not in kwargs or kwargs['db'] not in self.cluster.db_list:
             raise ValueError("The 'db' kwarg is required and must contain a value "
                              "from {}".format(self.cluster.db_list))
-        if kwargs['type'] != 'convio':
-            if 'db_user' not in kwargs:
-                raise TypeError("The 'db_user' kwarg is required when using 'type' "
-                                "of {}".format(kwargs['type']))
-            if 'db_pass' not in kwargs:
-                raise TypeError("The 'db_pass' kwarg is required when using 'type' "
-                                "of {}".format(kwargs['type']))
         if 'min' in kwargs:
             if kwargs['min'] < 1 or kwargs['min'] > 5:
                 raise ValueError("The 'min' kwarg cannot exceed 5")
