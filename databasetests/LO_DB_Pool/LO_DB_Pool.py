@@ -83,15 +83,15 @@ class LODBPool:
 
         if kwargs['type'] == 'convio':
             try:
-                self.pool = cx_Oracle.SessionPool('convio', 'convio', kwargs['db'],
-                                                  min=kwargs['min'], max=kwargs['max'],
-                                                  increment=1, encoding="UTF-8")
+                self.pool = cx_Oracle.SessionPool(user='convio', password='convio',
+                                                  dsn=kwargs['db'], min=kwargs['min'],
+                                                  max=kwargs['max'], increment=1, encoding="UTF-8")
             except cx_Oracle.DatabaseError as error:
                 print(error)
                 raise error
         elif kwargs['type'] == 'site':
             try:
-                self.pool = cx_Oracle.SessionPool(kwargs['db'], min=kwargs['min'],
+                self.pool = cx_Oracle.SessionPool(dsn=kwargs['db'], min=kwargs['min'],
                                                   max=kwargs['max'], increment=1, encoding="UTF-8",
                                                   homogeneous=False)
             except cx_Oracle.DatabaseError as error:
