@@ -109,16 +109,16 @@ class LODBPool:
 
 
 class ConvioPool(LODBPool):
-    def __init__(self):
-        pass
+    def __init__(self, **kwargs):
+        super().__init__(type='convio', **kwargs)
 
-    def getConn(self):
+    def get_connection(self):
         pass
 
 
 class SitePool(LODBPool):
-    def __init__(self):
-        pass
+    def __init__(self, **kwargs):
+        super().__init__(type='site', **kwargs)
 
-    def getConn(self, site):
+    def get_connection(self, site):
         pass
