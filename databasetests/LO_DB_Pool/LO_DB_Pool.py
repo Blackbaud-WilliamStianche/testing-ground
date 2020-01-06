@@ -40,6 +40,20 @@ from utils import Cluster
 
 
 class LODBPool:
+    """kwargs:
+        prod_file: pathlike or filelike object to pass on to Cluster
+        db_file: pathlike or filelike object to pass on to Cluster
+        type: type of pool to create
+            Options:
+                convio: creates homogenous pool to a single db with convio credentials
+                site: creates heterogenous pool to a single db where site credentials can be used
+                    during connection acquisition.
+                db: database sid to connect to
+                db_user: database username to connect with when acquiring a site pool connection
+                db_pass: database password to connect with when acquiring a site pool connection
+                min: minimum size of the pool
+                max: maximum size of the pool"""
+
     def __init__(self, **kwargs):
         accepted_types = ('convio', 'site')
 
@@ -94,9 +108,17 @@ class LODBPool:
                 raise error
 
 
-class ConvioPool:
-    pass
+class ConvioPool(LODBPool):
+    def __init__(self):
+        pass
+
+    def getConn(self):
+        pass
 
 
-class SitePool:
-    pass
+class SitePool(LODBPool):
+    def __init__(self):
+        pass
+
+    def getConn(self, site):
+        pass
