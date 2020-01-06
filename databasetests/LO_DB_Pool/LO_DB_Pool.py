@@ -45,10 +45,10 @@ class LODBPool:
         db_file: pathlike or filelike object to pass on to Cluster
         type: type of pool to create
             Options:
-                convio: creates homogenous pool to a single db with convio credentials
-                site: creates heterogenous pool to a single db where site credentials can be used
+                convio: creates homogeneous pool to a single db with convio credentials
+                site: creates heterogeneous pool to a single db where site credentials can be used
                     during connection acquisition.
-                db: database sid to connect to
+                db: database sid/dsn to connect to
                 min: minimum size of the pool
                 max: maximum size of the pool"""
 
