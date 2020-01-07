@@ -104,7 +104,7 @@ class ConvioPool(LODBPool):
         super().__init__(type='convio', **kwargs)
 
     def get_connection(self):
-        pass
+        return self.pool.acquire()
 
 
 class SitePool(LODBPool):
@@ -112,4 +112,7 @@ class SitePool(LODBPool):
         super().__init__(type='site', **kwargs)
 
     def get_connection(self, site):
-        pass
+        if site.site_db == self.pool.tnsentry:
+            return self.pool.acquire(user=site.short, password=site.short)
+        else:
+            raise ValueError("Site {} is not on {}.".format(site.short, self.pool.tnsentry))

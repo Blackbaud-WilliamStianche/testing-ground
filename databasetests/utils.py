@@ -29,6 +29,7 @@ from pathlib import Path
 
 CLUSTER_IDS = {'tc': 1, 'itc': 8, 2: 2, 3: 3}
 
+
 class Cluster:
     """This class represents a Cluster and should contain various cluster specific items.
 
