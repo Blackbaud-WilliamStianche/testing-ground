@@ -106,13 +106,20 @@ class ConvioPool(LODBPool):
     def get_connection(self):
         return self.pool.acquire()
 
+    def close_connection(self):
+        pass
+
 
 class SitePool(LODBPool):
     def __init__(self, **kwargs):
         super().__init__(type='site', **kwargs)
+        self.connection_list = list()
 
     def get_connection(self, site):
         if site.site_db == self.pool.tnsentry:
             return self.pool.acquire(user=site.short, password=site.short)
         else:
             raise ValueError("Site {} is not on {}.".format(site.short, self.pool.tnsentry))
+
+    def close_connection(self):
+        pass
